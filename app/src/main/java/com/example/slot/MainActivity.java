@@ -8,15 +8,17 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private int a, b, c, d, e, f, num, count, played;
+    private  String name;
     private TextView at, bt, ct, dt, et, ft, numt, countWin;
     private Button start,newGame,score;
-
+    private EditText nameEt;
     public static int countAll, gamesPlayed;
     private boolean isRunning; // Renamed for clarity
     private Handler handler;
@@ -39,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
         countWin = findViewById(R.id.countWinID);
         newGame = findViewById(R.id.newGameID);
         score = findViewById(R.id.ScoreID);
+        nameEt = findViewById(R.id.editTextText);
         count=0;
         played=0;
         gamesPlayed=0;
         countAll=0;
         Intent scoreAc = new Intent(MainActivity.this, ScoreActivity.class);
 
-        // --- Initial setup for the 6 static numbers ---
         a = (int) (Math.random() * 39) + 1;
         b = (int) (Math.random() * 39) + 1;
         c = (int) (Math.random() * 39) + 1;
@@ -160,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
         score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                name = nameEt.getText().toString();
+                scoreAc.putExtra("NAME",name);
                 startActivity(scoreAc);
             }
         });

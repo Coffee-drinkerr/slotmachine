@@ -18,6 +18,14 @@
         android:textSize="20dp" />
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="name"
+        android:gravity="center"
+        />
+
+    <TextView
         android:id="@+id/gamesPlayedID"
         android:layout_width="match_parent"
         android:layout_height="128dp"
