@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            at.setText(String.valueOf(a));
+        at.setText(String.valueOf(a));
         bt.setText(String.valueOf(b));
         ct.setText(String.valueOf(c));
         dt.setText(String.valueOf(d));
@@ -157,6 +157,25 @@ public class MainActivity extends AppCompatActivity {
                 d = (int) (Math.random() * 39) + 1;
                 e = (int) (Math.random() * 39) + 1;
                 f = (int) (Math.random() * 39) + 1;
+
+                while (a==b||a==c||a==d||a==e||a==f) {
+                    a = (int) (Math.random() * 39) + 1;
+                }
+                while (b==a||b==c||b==d||b==e||b==f) {
+                    b = (int) (Math.random() * 39) + 1;
+                }
+                while (c==a||c==b||c==d||c==e||c==f) {
+                    c = (int) (Math.random() * 39) + 1;
+                }
+                while (d==a||d==b||d==c||d==e||b==f) {
+                    d = (int) (Math.random() * 39) + 1;
+                }
+                while (e==a||e==b||e==c||e==d||e==f) {
+                    e = (int) (Math.random() * 39) + 1;
+                }
+                while (f==a||f==b||f==c||f==d||f==e) {
+                    b = (int) (Math.random() * 39) + 1;
+                }
 
                 at.setText(String.valueOf(a));
                 bt.setText(String.valueOf(b));
