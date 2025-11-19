@@ -1,6 +1,7 @@
 package com.example.slot;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,13 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private int a, b, c, d, e, f, num, count, played;
     private  String name;
     private TextView at, bt, ct, dt, et, ft, numt, countWin;
-    private Button start,newGame,score;
+    private Button start,newGame,score,Exit;
     private EditText nameEt;
     public static int countAll, gamesPlayed;
     private boolean isRunning; // Renamed for clarity
@@ -42,11 +44,14 @@ public class MainActivity extends AppCompatActivity {
         newGame = findViewById(R.id.newGameID);
         score = findViewById(R.id.ScoreID);
         nameEt = findViewById(R.id.editTextText);
+        Exit = findViewById(R.id.exitId);
         count=0;
         played=0;
         gamesPlayed=0;
         countAll=0;
         Intent scoreAc = new Intent(MainActivity.this, ScoreActivity.class);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
 
         a = (int) (Math.random() * 39) + 1;
         b = (int) (Math.random() * 39) + 1;
@@ -205,6 +210,32 @@ public class MainActivity extends AppCompatActivity {
                 name = nameEt.getText().toString();
                 scoreAc.putExtra("NAME",name);
                 startActivity(scoreAc);
+            }
+        });
+        Exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                makeDialog(alertDialog);
+                AlertDialog dialog = alertDialog.create();
+                dialog.show();
+            }
+        });
+    }
+    public void makeDialog(AlertDialog.Builder alertDialog){
+        alertDialog.setTitle("Exit");
+        alertDialog.setMessage("Are you sure you want to exit?");
+        alertDialog.setIcon(R.drawable.alert);
+        alertDialog.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+                System.exit(0);
+            }
+        });
+        alertDialog.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
             }
         });
     }
