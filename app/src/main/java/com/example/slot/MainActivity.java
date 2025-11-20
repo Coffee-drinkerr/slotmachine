@@ -1,6 +1,7 @@
 package com.example.slot;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     public static int countAll, gamesPlayed;
     private boolean isRunning; // Renamed for clarity
     private Handler handler;
+    AlertDialog dialog;
+    Dialog customDialog;
     private Runnable numberGeneratorRunnable;
 
     @SuppressLint("MissingInflatedId")
@@ -215,9 +218,7 @@ public class MainActivity extends AppCompatActivity {
         Exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                makeDialog(alertDialog);
-                AlertDialog dialog = alertDialog.create();
-                dialog.show();
+                makeCustomDialog();
             }
         });
     }
@@ -238,5 +239,27 @@ public class MainActivity extends AppCompatActivity {
                 dialogInterface.dismiss();
             }
         });
+        dialog= alertDialog.create();
+    }
+    public void makeCustomDialog(){
+        customDialog = new Dialog(this);
+        customDialog.setContentView(R.layout.custom_dialog);
+
+        Button btnYes = customDialog.findViewById(R.id.btnYes);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                System.exit(0);
+            }
+        });
+        Button btnNo = customDialog.findViewById(R.id.btnNo);
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customDialog.dismiss();
+            }
+        });
+        customDialog.show();
     }
 }
