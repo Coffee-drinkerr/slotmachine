@@ -274,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 name= welcomeName.getText().toString();
                 age = welcomeAge.getText().toString();
+                if(!name.isEmpty()&&!age.isEmpty())
                 nametv.setText(name);
                 agetv.setText(age);
                 welcomeDialog.dismiss();
