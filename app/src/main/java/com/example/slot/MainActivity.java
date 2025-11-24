@@ -18,15 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private int a, b, c, d, e, f, num, count, played;
-    private  String name;
-    private TextView at, bt, ct, dt, et, ft, numt, countWin;
-    private Button start,newGame,score,Exit;
-    private EditText nameEt;
+    private  String name,age;
+    private TextView at, bt, ct, dt, et, ft, numt, agetv, nametv, countWin;
+    private Button start,newGame,score,Exit,login;
     public static int countAll, gamesPlayed;
     private boolean isRunning; // Renamed for clarity
     private Handler handler;
-    AlertDialog dialog;
-    Dialog customDialog;
+    private AlertDialog dialog;
+    private Dialog customDialog,welcomeDialog;
     private Runnable numberGeneratorRunnable;
 
     @SuppressLint("MissingInflatedId")
@@ -46,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         countWin = findViewById(R.id.countWinID);
         newGame = findViewById(R.id.newGameID);
         score = findViewById(R.id.ScoreID);
-        nameEt = findViewById(R.id.editTextText);
+        nametv = findViewById(R.id.yournameID);
+        agetv = findViewById(R.id.yourageID);
         Exit = findViewById(R.id.exitId);
         count=0;
         played=0;
@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
         countAll=0;
         Intent scoreAc = new Intent(MainActivity.this, ScoreActivity.class);
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        buildDialog();
+        welcomeDialog.show();
 
 
         a = (int) (Math.random() * 39) + 1;
@@ -81,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         while (f==a||f==b||f==c||f==d||f==e) {
             b = (int) (Math.random() * 39) + 1;
         }
-
 
 
         at.setText(String.valueOf(a));
@@ -210,7 +212,6 @@ public class MainActivity extends AppCompatActivity {
         score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name = nameEt.getText().toString();
                 scoreAc.putExtra("NAME",name);
                 startActivity(scoreAc);
             }
@@ -261,5 +262,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         customDialog.show();
+    }
+    public void buildDialog(){
+        welcomeDialog = new Dialog(this);
+        welcomeDialog.setContentView(R.layout.welcome_dialog);
+        EditText welcomeName = welcomeDialog.findViewById(R.id.welcomeName);
+        EditText welcomeAge = welcomeDialog.findViewById(R.id.welcomeAge);
+        login = welcomeDialog.findViewById(R.id.loginBtn);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name= welcomeName.getText().toString();
+                age = welcomeAge.getText().toString();
+                nametv.setText(name);
+                agetv.setText(age);
+                welcomeDialog.dismiss();
+            }
+        });
     }
 }
