@@ -270,14 +270,16 @@ public class MainActivity extends AppCompatActivity {
         EditText welcomeAge = welcomeDialog.findViewById(R.id.welcomeAge);
         login = welcomeDialog.findViewById(R.id.loginBtn);
         login.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View view) {
                 name= welcomeName.getText().toString();
                 age = welcomeAge.getText().toString();
-                if(!name.isEmpty()&&!age.isEmpty())
-                nametv.setText(name);
-                agetv.setText(age);
-                welcomeDialog.dismiss();
+                if(!name.isEmpty()&&!age.isEmpty()) {
+                    nametv.setText(name);
+                    agetv.setText(age);
+                    welcomeDialog.dismiss();
+                }
             }
         });
     }
